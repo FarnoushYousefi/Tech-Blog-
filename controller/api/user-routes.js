@@ -59,7 +59,7 @@ router.get('/:id', (req, res) => {
     });
 });
 
-//add user
+//add user through the signup form
 router.post('/', (req, res) => {
   User.create({
     username: req.body.username,
