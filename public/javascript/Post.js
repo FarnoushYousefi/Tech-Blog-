@@ -1,39 +1,30 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
-// create our Post model
-class Post extends Model {}
+console.log('loaded!');
+async function postFormHandler(event) {
+  event.preventDefault();
 
-// create fields/columns for Post model
-Post.init(
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    title: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    body: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    user_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'user',
-        key: 'id',
-      },
-    },
-  },
-  {
-    sequelize,
-    freezeTableName: true,
-    underscored: true,
-    modelName: 'post',
+  const title = document.querySelector('#title-input-login').value.trim();
+  const body = document.querySelector('#body-input-login').value.trim();
+
+  if (title && body) {
+    const response = await fetch('/api/posts', {
+      method: 'POST',
+      body: JSON.stringify({
+        title,
+        body,
+      }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    // check the response status
+    if (response.ok) {
+      console.log('success');
+      location.replace('/');
+    } else {
+      alert(response.statusText);
+    }
   }
-);
+}
 
-module.exports = Post;
+document
+  .querySelector('#post-form')
+  .addEventListener('submit', postFormHandler);

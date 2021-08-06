@@ -1,4 +1,6 @@
 const path = require('path');
+var morgan = require('morgan');
+var logger = morgan('dev');
 const express = require('express');
 const exphbs = require('express-handlebars');
 const session = require('express-session');
@@ -31,6 +33,7 @@ const hbs = exphbs.create({
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
+app.use(logger);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -38,6 +41,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(require('./controller/'));
 
-sequelize.sync({ force: true }).then(() => {
+sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log('Now listening'));
 });

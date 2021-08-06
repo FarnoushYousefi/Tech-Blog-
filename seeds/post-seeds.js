@@ -4,12 +4,12 @@ const postdata = [
   {
     title: 'Donec posuere metus vitae ipsum.',
     body: 'https://buzzfeed.com/in/imperdiet/et/commodo/vulputate.png',
-    user_id: 10,
+    user_id: 1,
   },
   {
     title: 'Morbi non quam nec dui luctus rutrum.',
     body: 'https://nasa.gov/donec.json',
-    user_id: 8,
+    user_id: 2,
   },
   {
     title:
@@ -19,12 +19,12 @@ const postdata = [
   },
   {
     title: 'Nunc purus.',
-    body: 'http://desdev.cn/enim/blandit/mi.jpg',
+    body: 'desdev.cn/enim/blandit',
     user_id: 4,
   },
   {
     title: 'Pellentesque eget nunc.',
-    body: 'http://google.ca/nam/nulla/integer.aspx',
+    body: 'google.ca/nam/nulla',
     user_id: 7,
   },
   {

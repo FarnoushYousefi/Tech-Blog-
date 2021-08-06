@@ -1,0 +1,17 @@
+<article class="post">
+      <div class="title">
+        <a href="/post/{{post.id}}" target="_blank">{{post.title}}</a>
+        <span>({{post.body}})</span>
+      </div>
+      <div class="meta">
+        {{post.vote_count}} point(s) by {{post.user.username}} on
+        {{post.created_at}}
+        |
+        <p>{{post.comments.length}} comment(s)</p>
+        {{#each post.comments}}
+        <p>{{comment_text}}</p>
+        {{/each}}
+      </div>
+      <button> Edit</button>
+      <button> Delete</button>
+    </article>

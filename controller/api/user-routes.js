@@ -60,6 +60,7 @@ router.get('/:id', (req, res) => {
 
 //add user through the signup form
 router.post('/', (req, res) => {
+  console.log(req.body);
   User.create({
     username: req.body.username,
     email: req.body.email,
@@ -76,6 +77,7 @@ router.post('/', (req, res) => {
       });
     })
     .catch((err) => {
+      console.log(err);
       res.status(500).json(err);
     });
 });
@@ -156,6 +158,7 @@ router.delete('/:id', (req, res) => {
 });
 
 router.post('/logout', (req, res) => {
+  console.log('I have logout************');
   if (req.session.loggedIn) {
     req.session.destroy(() => {
       // end the session

@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
       }
       const posts = dbPostData.map((post) => post.get({ plain: true })); // serialize all the posts
       console.log(posts);
-      res.render('main', { posts, loggedIn: req.session.loggedIn });
+      res.render('homepage', { posts, loggedIn: req.session.loggedIn });
     })
     .catch((err) => {
       console.log(err);
@@ -34,7 +34,7 @@ router.get('/', (req, res) => {
 });
 
 //serve up the single post page
-router.get('/viewpost/:id', (req, res) => {
+router.get('/post/:id', (req, res) => {
   //we need to get all posts
   Post.findOne({
     where: {
@@ -137,11 +137,29 @@ router.get('/post', (req, res) => {
   res.render('create-post', { loggedIn: req.session.loggedIn });
 });
 //load the edit page
-router.get('/edit/:id', (req, res) => {
+router.get('/post/:id', (req, res) => {
   //    post_id: req.postID,
-  res.render('edit-post', {
-    loggedIn: req.session.loggedIn,
-    post_id: req.params.id,
+  Post.findOne({
+    where: {
+      id: req.params.id,
+    },
+    include: [
+      //{
+      //   model: Post,
+      //   attributes: ['id', 'title', 'body'],
+      // },
+      {
+        model: Comment,
+
+        attributes: ['id', 'comment_text', 'post_id'],
+      },
+    ],
+  }).then((dbpostdata) => {
+    console.log(dbpostdata);
+    res.render('single-post', {
+      loggedIn: req.session.loggedIn,
+      post: dbpostdata,
+    });
   });
 });
 module.exports = router;
