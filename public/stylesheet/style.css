@@ -1,5 +1,5 @@
 :root {
-  --primary: #ccdad1;
+  --primary: #e4f0e8;
   --secondary: #9caea9;
   --tertiary: #788585;
   --light-dark: #6f6866;
@@ -21,8 +21,20 @@ body {
 }
 
 .navbar {
-  width: 100%;
-  display: flex;
-  flex-direction: row;  
+  width: 100%; 
   background-color: var(--dark);
+}
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.inline {
+  display: inline;
+}
+.nav-item {
+  margin: 0 40px;
+}
+h2 a {
+  color: var(--primary) !important;
 }

@@ -4,7 +4,7 @@
         <span>({{post.body}})</span>
       </div>
       <div class="meta">
-        {{post.vote_count}} point(s) by {{post.user.username}} on
+        This Post created by {{post.user.username}} on
         {{post.created_at}}
         |
         <p>{{post.comments.length}} comment(s)</p>
@@ -12,6 +12,7 @@
         <p>{{comment_text}}</p>
         {{/each}}
       </div>
-      <button> Edit</button>
-      <button> Delete</button>
+      <button id="edit"> Edit</button>
+      <button id="delete"> Delete</button>
     </article>
+    <script src="/javascript/edit-post.js"></script>

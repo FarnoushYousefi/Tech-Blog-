@@ -158,7 +158,7 @@ router.delete('/:id', (req, res) => {
 });
 
 router.post('/logout', (req, res) => {
-  console.log('I have logout************');
+  console.log('I am logout************');
   if (req.session.loggedIn) {
     req.session.destroy(() => {
       // end the session

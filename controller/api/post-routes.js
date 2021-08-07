@@ -75,6 +75,7 @@ router.put('/:id', (req, res) => {
     {
       title: req.body.title,
       body: req.body.body,
+      user_id: req.session.user_id,
     },
     {
       where: {
