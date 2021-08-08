@@ -25,7 +25,11 @@ router.get('/', (req, res) => {
       }
       const posts = dbPostData.map((post) => post.get({ plain: true })); // serialize all the posts
       console.log(posts);
-      res.render('homepage', { posts, loggedIn: req.session.loggedIn });
+      if (req.session.loggedIn) {
+        res.render('homepage', { posts, loggedIn: req.session.loggedIn });
+      } else {
+        res.render('login');
+      }
     })
     .catch((err) => {
       console.log(err);
@@ -114,5 +118,50 @@ router.get('/post/:id', (req, res) => {
       post: dbpostdata,
     });
   });
+});
+router.get('/post/edit/:id', (req, res) => {
+  //we need to get all posts
+  Post.findOne({
+    where: {
+      id: req.params.id,
+    },
+    attributes: ['id', 'title', 'body', 'user_id'],
+    include: [
+      {
+        model: User,
+        as: 'user',
+        attributes: ['username'],
+      },
+      {
+        model: Comment,
+        attributes: ['id', 'comment_text', 'user_id'],
+        include: [
+          {
+            model: User,
+            attributes: ['username'],
+          },
+        ],
+      },
+    ],
+  })
+    .then((dbPostData) => {
+      //serialize data
+      if (!dbPostData) {
+        res.status(404).json({ message: 'No Posts Available' });
+        return;
+      }
+      const post = dbPostData.get({ plain: true }); // serialize all the posts
+      console.log(post);
+      const myPost = post.user_id == req.session.user_id;
+      res.render('update', {
+        post,
+        loggedIn: req.session.loggedIn,
+        currentUser: myPost,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 module.exports = router;

@@ -35,6 +35,9 @@ body {
 .nav-item {
   margin: 0 40px;
 }
-h2 a {
+a{
   color: var(--primary) !important;
 }
+.tag {
+  color: var(--dark) !important;
+} 

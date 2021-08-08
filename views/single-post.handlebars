@@ -1,7 +1,7 @@
 <article class="post">
-      <div class="title">
-        <a href="/post/{{post.id}}" target="_blank">{{post.title}}</a>
-        <span>({{post.body}})</span>
+      <div>
+        <a href="/post/{{post.id}}" target="_blank" class="title">{{post.title}}</a>
+        <span id="body">({{post.body}})</span>
       </div>
       <div class="meta">
         This Post created by {{post.user.username}} on
@@ -12,7 +12,7 @@
         <p>{{comment_text}}</p>
         {{/each}}
       </div>
-      <button id="edit"> Edit</button>
-      <button id="delete"> Delete</button>
+      
+      <a href="/post/edit/{{post.id}}" class="btn btn-primary">Edit</a>
     </article>
-    <script src="/javascript/edit-post.js"></script>
+   
