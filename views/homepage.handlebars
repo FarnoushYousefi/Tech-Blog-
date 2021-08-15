@@ -10,7 +10,7 @@
       </div>
       <div class="meta">
         Comments Created By {{post.user.username}} on
-        {{post.created_at}}
+        {{ format_date post.created_at}}
         |
         <p>{{post.comments.length}} comment(s)</p>
       </div>
