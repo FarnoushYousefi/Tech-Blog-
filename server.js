@@ -23,7 +23,7 @@ const sess = {
 app.use(session(sess));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
 
 const hbs = exphbs.create({
   helpers: {
