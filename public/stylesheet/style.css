@@ -41,3 +41,9 @@ a{
 .tag {
   color: var(--dark) !important;
 } 
+.hide{
+  visibility: hidden;
+}
+.show{
+  visibility: visible;
+}

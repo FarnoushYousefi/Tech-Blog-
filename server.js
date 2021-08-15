@@ -21,11 +21,15 @@ const sess = {
 };
 
 app.use(session(sess));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
 
 const hbs = exphbs.create({
   helpers: {
     format_date: (date) => {
       return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+      // return date.toUTCString();
     },
   },
 });
@@ -34,10 +38,6 @@ const hbs = exphbs.create({
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 app.use(logger);
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(require('./controller/'));
 

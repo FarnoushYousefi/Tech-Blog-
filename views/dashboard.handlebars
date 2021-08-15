@@ -1,13 +1,10 @@
- 
- 
-<a href="/post"> <button type="button" class="btn btn-secondary">Add a New Post</button></a>
- 
+<a href="/post"> <button type="button" class="btn btn-secondary">Add a New Post</button></a> 
 <ol class="post-list">
   {{#each posts as |post|}}
   <li>
     <article class="post">
       <div class="title">
-        <a href="/post/{{post.id}}" class="tag" target="_blank">{{post.title}}</a>
+        <a href="/post/{{post.id}}" class="tag">{{post.title}}</a>
       </div>
       <div class="meta">
         Comments Created By {{post.user.username}} on
