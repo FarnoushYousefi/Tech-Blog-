@@ -1,38 +1,52 @@
-<article class="post">
-    <div>
-      <a href="/post/{{post.id}}" target="_blank" class="title">{{post.title}}</a>
-      <span id="body">({{post.body}})</span>
-    </div>
-    <div class="meta">
-      This Post created by {{post.user.username}} on
-      {{post.created_at}}
-      |
-      <p>{{post.comments.length}} comment(s)</p>
-      {{#each post.comments}}
-      <p>{{comment_text}}</p>
-      {{/each}}
-    </div>
-    {{#if currentUser}}
-    <a href="/post/edit/{{post.id}}" class="btn btn-primary">Edit</a>
-    {{/if}}
-      <button type="button" class="btn btn-primary" id="comment-btn">Add the comment</button>
-      <div class="card hide" id="formcard">
-        <div class="card-header">
-          <h2>Add a Comment</h2>
-        </div>
-        <form id="new-comment-form" class="card-body">
-          <div>
-            <input type="hidden" name="post-id" value={{post.id}}>
-          </div>
-          <div>
-            <label for="comment-text" class="form-label">Body</label>
-            <textarea id="comment-text" name="comment-body">
-           </textarea>
-          </div>
-          <button type="submit" id="comment-submit-btn" class="btn">Submit</button>
-        </form>
+<div class="post">
+  <article class="card">
+    <div class="card-header flex-row justify-space-between">
+      <h2>{{post.title}}</h2>
+      <div>
+        Posted by {{post.User.username}} on {{format_date post.createdAt}}
       </div>
+    </div>
+    <div class="card-body">
+      {{post.body}}
+    </div>
   </article>
-<script src="/javascript/comment.js"></script>
 
-   
+  {{#if post.Comments}}
+    <section class="card">
+      <div class="card-header">
+        <h3>Comments</h3>
+      </div>
+
+      <div class="card-body">
+        {{#each post.Comments}}
+          <div>
+            <p>
+              {{body}}
+            </p>
+            <p>
+              &mdash; {{User.username}}, {{format_date createdAt}}
+            </p>
+          </div>
+        {{/each}}
+      </div>
+    </section>
+  {{/if}}
+
+  <form id="new-comment-form" class="card">
+    <div class="card-header">
+      <h3>Add New Comment</h3>
+    </div>
+
+    <div class="card-body">
+      <input type="hidden" name="post-id" value="{{post.id}}" />
+
+      <label class="form-label" for="comment-body">Comment</label>
+
+      <textarea name="comment-body" class="form-input"></textarea>
+
+      <button type="submit" class="btn">Submit</button>
+    </div>
+  </form>
+</div>
+
+<script src="/js/comment.js"></script>
